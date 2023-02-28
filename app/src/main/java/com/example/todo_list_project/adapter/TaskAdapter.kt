@@ -1,29 +1,83 @@
-package com.example.todo_list_project.adapter
-
-import android.content.Context
+import android.animation.Animator
+import android.animation.AnimatorListenerAdapter
+import android.animation.ValueAnimator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
-import android.widget.Toast
-import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_list_project.R
 import com.example.todo_list_project.classes.Task
-import java.text.SimpleDateFormat
-import java.util.*
 
-class TaskAdapter(private val taskList: List<Task>) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter(private val tasks: List<Task>) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
 
-    class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val cardView: CardView = view.findViewById(R.id.cardView)
-        val titleTextView: TextView = view.findViewById(R.id.titleTextView)
-        val descriptionTextView: TextView = view.findViewById(R.id.descriptionTextView)
-        val startingDateTextView: TextView = view.findViewById(R.id.startingDateTextView)
-        val endingDateTextView: TextView = view.findViewById(R.id.endingDateTextView)
-        val reminderDateTextView: TextView = view.findViewById(R.id.reminderDateTextView)
+    class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+
+        private val titleLayout: LinearLayout = itemView.findViewById(R.id.titleLayout)
+        private val titleTextView: TextView = itemView.findViewById(R.id.textTitle)
+        private val detailsLayout: LinearLayout = itemView.findViewById(R.id.expandedLayout)
+        private val descriptionTextView: TextView = itemView.findViewById(R.id.textDescription)
+        private val startingDateTextView: TextView = itemView.findViewById(R.id.textStartingDate)
+        private val endingDateTextView: TextView = itemView.findViewById(R.id.textEndingDate)
+        private val reminderTextView: TextView = itemView.findViewById(R.id.textReminder)
+
+        private val collapsedHeight: Int = itemView.resources.getDimensionPixelSize(R.dimen.task_item_collapsed_height)
+        private val expandedHeight: Int = itemView.resources.getDimensionPixelSize(R.dimen.task_item_expanded_height)
+        private val duration: Long = itemView.resources.getInteger(R.integer.animation_duration).toLong()
+
+        private var isExpanded: Boolean = false
+
+        init {
+            titleLayout.setOnClickListener {
+                toggleExpansion()
+            }
+        }
+
+        fun bind(task: Task) {
+            titleTextView.text = task.title
+            descriptionTextView.text = task.description
+            startingDateTextView.text = task.startingDate.toString()
+            endingDateTextView.text = task.endingDate.toString()
+            reminderTextView.text = task.reminder.toString()
+
+            titleLayout.visibility = View.VISIBLE
+            detailsLayout.visibility = View.GONE
+        }
+
+        private fun toggleExpansion() {
+            val startHeight = if (isExpanded) expandedHeight else collapsedHeight
+            val endHeight = if (isExpanded) collapsedHeight else expandedHeight
+
+            val animator = ValueAnimator.ofInt(startHeight, endHeight)
+            animator.duration = duration
+
+            animator.addUpdateListener { valueAnimator ->
+                val animatedValue = valueAnimator.animatedValue as Int
+                val layoutParams = detailsLayout.layoutParams
+                layoutParams.height = animatedValue
+                detailsLayout.layoutParams = layoutParams
+            }
+
+            animator.addListener(object : AnimatorListenerAdapter() {
+                override fun onAnimationEnd(animation: Animator) {
+                    if (animation != null) {
+                        super.onAnimationEnd(animation)
+                    }
+                    isExpanded = !isExpanded
+
+                    if (isExpanded) {
+                        titleLayout.visibility = View.GONE
+                        detailsLayout.visibility = View.VISIBLE
+                    } else {
+                        titleLayout.visibility = View.VISIBLE
+                        detailsLayout.visibility = View.GONE
+                    }
+                }
+            })
+
+            animator.start()
+        }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -31,29 +85,11 @@ class TaskAdapter(private val taskList: List<Task>) : RecyclerView.Adapter<TaskA
         return TaskViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        val task = taskList[position]
-        holder.titleTextView.text = task.title
-        holder.descriptionTextView.text = task.description
-        holder.startingDateTextView.text = formatDate(task.startingDate)
-        holder.endingDateTextView.text = formatDate(task.endingDate)
-        holder.reminderDateTextView.text = formatDateTime(task.reminder)
-
-        // Arrondir les bords du CardView
-        holder.cardView.radius = 16f
-    }
-
     override fun getItemCount(): Int {
-        return taskList.size
+        return tasks.size
     }
 
-    private fun formatDate(date: Date): String {
-        val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
-        return dateFormat.format(date)
-    }
-
-    private fun formatDateTime(date: Date): String {
-        val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
-        return dateFormat.format(date)
+    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
+        holder.bind(tasks[position])
     }
 }

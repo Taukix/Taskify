@@ -1,12 +1,10 @@
 package com.example.todo_list_project
 
+import TaskAdapter
 import android.os.Bundle
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todo_list_project.adapter.TaskAdapter
 import com.example.todo_list_project.classes.Task
 import java.text.SimpleDateFormat
 import java.util.*
