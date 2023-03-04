@@ -4,6 +4,7 @@ import android.animation.ValueAnimator
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnimationUtils
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
@@ -69,9 +70,7 @@ class TaskAdapter(private val tasks: List<Task>) : RecyclerView.Adapter<TaskAdap
 
             animator.addListener(object : AnimatorListenerAdapter() {
                 override fun onAnimationEnd(animation: Animator) {
-                    if (animation != null) {
-                        super.onAnimationEnd(animation)
-                    }
+                    super.onAnimationEnd(animation)
                     isExpanded = !isExpanded
 
                     if (isExpanded) {
@@ -96,6 +95,7 @@ class TaskAdapter(private val tasks: List<Task>) : RecyclerView.Adapter<TaskAdap
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
         val isExpanded = position == expandedPosition
         holder.bind(tasks[position], isExpanded)
+        holder.itemView.animation = AnimationUtils.loadAnimation(holder.itemView.context, R.anim.list_animation)
     }
 
 

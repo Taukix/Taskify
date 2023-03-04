@@ -29,6 +29,7 @@
             android:textSize="18sp"
             android:textStyle="bold" />
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/expandedLayout"
         android:layout_width="match_parent"
@@ -40,25 +41,25 @@
             android:id="@+id/textDescription"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"/>
+            android:padding="16dp" />
 
         <TextView
             android:id="@+id/textStartingDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"/>
+            android:padding="16dp" />
 
         <TextView
             android:id="@+id/textEndingDate"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"/>
+            android:padding="16dp" />
 
         <TextView
             android:id="@+id/textReminder"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"/>
+            android:padding="16dp" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
