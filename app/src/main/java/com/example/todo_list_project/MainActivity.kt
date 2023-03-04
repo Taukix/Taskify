@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getTaskList(): List<Task> {
-        // Créez une liste de tâches factice pour cet exemple
+        // Création d'une liste de tâches factice pour cet exemple
         val taskList = mutableListOf<Task>()
         val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 

@@ -7,10 +7,13 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todo_list_project.MainActivity
 import com.example.todo_list_project.R
 import com.example.todo_list_project.classes.Task
 
 class TaskAdapter(private val tasks: List<Task>) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+
+    private var expandedPosition = RecyclerView.NO_POSITION
 
     class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
@@ -34,7 +37,7 @@ class TaskAdapter(private val tasks: List<Task>) : RecyclerView.Adapter<TaskAdap
             }
         }
 
-        fun bind(task: Task) {
+        fun bind(task: Task, isExpanded: Boolean) {
             titleTextView.text = task.title
             descriptionTextView.text = task.description
             startingDateTextView.text = task.startingDate.toString()
@@ -42,7 +45,12 @@ class TaskAdapter(private val tasks: List<Task>) : RecyclerView.Adapter<TaskAdap
             reminderTextView.text = task.reminder.toString()
 
             titleLayout.visibility = View.VISIBLE
-            detailsLayout.visibility = View.GONE
+            detailsLayout.visibility = if (isExpanded) View.VISIBLE else View.GONE
+
+            this.isExpanded = isExpanded
+            val layoutParams = detailsLayout.layoutParams
+            layoutParams.height = if (isExpanded) expandedHeight else collapsedHeight
+            detailsLayout.layoutParams = layoutParams
         }
 
         private fun toggleExpansion() {
@@ -85,11 +93,14 @@ class TaskAdapter(private val tasks: List<Task>) : RecyclerView.Adapter<TaskAdap
         return TaskViewHolder(view)
     }
 
-    override fun getItemCount(): Int {
-        return tasks.size
+    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
+        val isExpanded = position == expandedPosition
+        holder.bind(tasks[position], isExpanded)
     }
 
-    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        holder.bind(tasks[position])
+
+
+    override fun getItemCount(): Int {
+        return tasks.size
     }
 }
