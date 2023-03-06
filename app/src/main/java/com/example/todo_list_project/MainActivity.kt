@@ -5,7 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todo_list_project.classes.Task
+import com.example.todo_list_project.handler.classes.Task
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -33,9 +33,11 @@ class MainActivity : AppCompatActivity() {
         val taskList = mutableListOf<Task>()
         val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
-        taskList.add(Task("Tâche 1", "Description de la tâche 1",
+        taskList.add(
+            Task("Tâche 1", "Description de la tâche 1",
             dateFormat.parse("01/01/2022"), dateFormat.parse("31/01/2022"),
-            dateFormat.parse("15/01/2022 12:00")))
+            dateFormat.parse("15/01/2022 12:00"))
+        )
 
         taskList.add(
             Task("Tâche 2", "Description de la tâche 2",
@@ -43,29 +45,23 @@ class MainActivity : AppCompatActivity() {
             dateFormat.parse("15/02/2022 12:00"))
         )
 
-        taskList.add(Task("Tâche 3", "Description de la tâche 3",
+        taskList.add(
+            Task("Tâche 3", "Description de la tâche 3",
             dateFormat.parse("01/03/2022"), dateFormat.parse("31/03/2022"),
-            dateFormat.parse("15/03/2022 12:00")))
+            dateFormat.parse("15/03/2022 12:00"))
+        )
 
-        taskList.add(Task("Tâche 4", "Description de la tâche 4",
+        taskList.add(
+            Task("Tâche 4", "Description de la tâche 4",
             dateFormat.parse("01/04/2022"), dateFormat.parse("30/04/2022"),
-            dateFormat.parse("15/04/2022 12:00")))
+            dateFormat.parse("15/04/2022 12:00"))
+        )
 
-        taskList.add(Task("Tâche 5", "Description de la tâche 5",
+        taskList.add(
+            Task("Tâche 5", "Description de la tâche 5",
             dateFormat.parse("01/05/2022"), dateFormat.parse("31/05/2022"),
-            dateFormat.parse("15/05/2022 12:00")))
-
-        taskList.add(Task("Tâche 6", "Description de la tâche 6",
-            dateFormat.parse("01/06/2022"), dateFormat.parse("30/06/2022"),
-            dateFormat.parse("15/06/2022 12:00")))
-
-        taskList.add(Task("Tâche 7", "Description de la tâche 7",
-            dateFormat.parse("01/07/2022"), dateFormat.parse("31/07/2022"),
-            dateFormat.parse("15/07/2022 12:00")))
-
-        taskList.add(Task("Tâche 8", "Description de la tâche 8",
-            dateFormat.parse("01/08/2022"), dateFormat.parse("31/08/2022"),
-            dateFormat.parse("15/08/2022 12:00")))
+            dateFormat.parse("15/05/2022 12:00"))
+        )
 
         return taskList
     }

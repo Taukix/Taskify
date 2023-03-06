@@ -1,6 +1,7 @@
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,97 +11,38 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_list_project.MainActivity
 import com.example.todo_list_project.R
-import com.example.todo_list_project.classes.Task
+import com.example.todo_list_project.handler.classes.Task
 
-class TaskAdapter(private val tasks: List<Task>) : RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter(private val taskList: List<Task>) : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
-    private var expandedPosition = RecyclerView.NO_POSITION
-
-    class TaskViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-
-        private val titleLayout: LinearLayout = itemView.findViewById(R.id.titleLayout)
-        private val titleTextView: TextView = itemView.findViewById(R.id.textTitle)
-        private val detailsLayout: LinearLayout = itemView.findViewById(R.id.expandedLayout)
-        private val descriptionTextView: TextView = itemView.findViewById(R.id.textDescription)
-        private val startingDateTextView: TextView = itemView.findViewById(R.id.textStartingDate)
-        private val endingDateTextView: TextView = itemView.findViewById(R.id.textEndingDate)
-        private val reminderTextView: TextView = itemView.findViewById(R.id.textReminder)
-
-        private val collapsedHeight: Int = itemView.resources.getDimensionPixelSize(R.dimen.task_item_collapsed_height)
-        private val expandedHeight: Int = itemView.resources.getDimensionPixelSize(R.dimen.task_item_expanded_height)
-        private val duration: Long = itemView.resources.getInteger(R.integer.animation_duration).toLong()
-
-        private var isExpanded: Boolean = false
-
-        init {
-            titleLayout.setOnClickListener {
-                toggleExpansion()
-            }
-        }
-
-        fun bind(task: Task, isExpanded: Boolean) {
-            titleTextView.text = task.title
-            descriptionTextView.text = task.description
-            startingDateTextView.text = task.startingDate.toString()
-            endingDateTextView.text = task.endingDate.toString()
-            reminderTextView.text = task.reminder.toString()
-
-            titleLayout.visibility = View.VISIBLE
-            detailsLayout.visibility = if (isExpanded) View.VISIBLE else View.GONE
-
-            this.isExpanded = isExpanded
-            val layoutParams = detailsLayout.layoutParams
-            layoutParams.height = if (isExpanded) expandedHeight else collapsedHeight
-            detailsLayout.layoutParams = layoutParams
-        }
-
-        private fun toggleExpansion() {
-            val startHeight = if (isExpanded) expandedHeight else collapsedHeight
-            val endHeight = if (isExpanded) collapsedHeight else expandedHeight
-
-            val animator = ValueAnimator.ofInt(startHeight, endHeight)
-            animator.duration = duration
-
-            animator.addUpdateListener { valueAnimator ->
-                val animatedValue = valueAnimator.animatedValue as Int
-                val layoutParams = detailsLayout.layoutParams
-                layoutParams.height = animatedValue
-                detailsLayout.layoutParams = layoutParams
-            }
-
-            animator.addListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: Animator) {
-                    super.onAnimationEnd(animation)
-                    isExpanded = !isExpanded
-
-                    if (isExpanded) {
-                        titleLayout.visibility = View.GONE
-                        detailsLayout.visibility = View.VISIBLE
-                    } else {
-                        titleLayout.visibility = View.VISIBLE
-                        detailsLayout.visibility = View.GONE
-                    }
-                }
-            })
-
-            animator.start()
-        }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.task_item, parent, false)
-        return TaskViewHolder(view)
+        return ViewHolder(view)
     }
 
-    override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
-        val isExpanded = position == expandedPosition
-        holder.bind(tasks[position], isExpanded)
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
+        val task = taskList[position]
+        holder.bind(task)
         holder.itemView.animation = AnimationUtils.loadAnimation(holder.itemView.context, R.anim.list_animation)
     }
 
-
-
     override fun getItemCount(): Int {
-        return tasks.size
+        return taskList.size
+    }
+
+    inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        private val title: TextView = itemView.findViewById(R.id.textTitle)
+        private val description: TextView = itemView.findViewById(R.id.textDescription)
+        private val startingDate: TextView = itemView.findViewById(R.id.textStartingDate)
+        private val endingDate: TextView = itemView.findViewById(R.id.textEndingDate)
+        private val reminder: TextView = itemView.findViewById(R.id.textReminder)
+
+        fun bind(task: Task) {
+            title.text = task.title
+            description.text = task.description
+            startingDate.text = task.startingDate.toString()
+            endingDate.text = task.endingDate.toString()
+            reminder.text = task.reminder.toString()
+        }
     }
 }
