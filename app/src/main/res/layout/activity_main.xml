@@ -34,12 +34,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/btnAddTask"
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnAddTaskPage"
         android:layout_width="73dp"
         android:layout_height="58dp"
         android:contentDescription="Button that give access to add a new task"
-        android:src="@drawable/add_task"
+        android:onClick="addTaskPage"
+        android:src="@drawable/baseline_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
