@@ -1,23 +1,22 @@
 package com.example.todo_list_project
 
 import TaskAdapter
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
 import android.os.Bundle
 import android.view.View
-import android.widget.AdapterView
-import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_list_project.handler.classes.Task
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import java.text.SimpleDateFormat
 import java.util.*
+
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var taskAdapter: TaskAdapter
     private lateinit var taskList: List<Task>
+    private lateinit var addTaskButton: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -32,6 +31,12 @@ class MainActivity : AppCompatActivity() {
         recyclerView.layoutManager = LinearLayoutManager(this)
         taskAdapter = TaskAdapter(taskList)
         recyclerView.adapter = taskAdapter
+
+        // Action du bouton d'ajout de tâche
+        addTaskButton = findViewById(R.id.btnAddTaskPage)
+        addTaskButton.setOnClickListener(View.OnClickListener {
+            AddNewTask.newInstance().show(supportFragmentManager, AddNewTask.TAG)
+        })
     }
 
     // Gestion de la liste de Tâches
