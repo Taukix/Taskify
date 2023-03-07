@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        supportActionBar?.hide()
 
         // Initialise notre liste de tâches
         taskList = getTaskList()
@@ -45,6 +46,8 @@ class MainActivity : AppCompatActivity() {
         reminderDateButton.setText(getTodaysDate())
         reminderTimeButton.setText(getTime())
     }
+
+    // Gestion de la liste de Tâches
 
     private fun getTaskList(): List<Task> {
         // Création d'une liste de tâches factice pour cet exemple
@@ -84,6 +87,9 @@ class MainActivity : AppCompatActivity() {
         return taskList
     }
 
+    //-------------------------------------------------------------------------------------
+
+    // Gestion des dates et heures pour l'ajout des tâches
     fun getTodaysDate(): String {
         val date = Calendar.getInstance().time
         return makeDateString(date.day, date.month, date.year)
@@ -127,4 +133,6 @@ class MainActivity : AppCompatActivity() {
         val date = Calendar.getInstance().time
         return makeTimeString(date.hours, date.minutes)
     }
+
+    //--------------------------------------------------------------------------------
 }
