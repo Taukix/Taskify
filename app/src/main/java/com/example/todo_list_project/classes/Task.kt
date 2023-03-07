@@ -9,4 +9,5 @@ class Task (
     var startingDate: Date,
     var endingDate: Date,
     var reminder: Date) {
+
 }

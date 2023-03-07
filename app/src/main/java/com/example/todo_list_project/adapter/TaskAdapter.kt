@@ -11,7 +11,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_list_project.MainActivity
 import com.example.todo_list_project.R
-import com.example.todo_list_project.handler.classes.Task
+import com.example.todo_list_project.classes.Task
 
 class TaskAdapter(private val taskList: List<Task>) : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
