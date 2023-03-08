@@ -49,6 +49,7 @@ class AddNewTask : BottomSheetDialogFragment() {
     fun showDatePicker(view: View, button: Button) {
         val datePickerDialog = DatePickerDialog(
             requireContext(),
+            R.style.CustomDatePicker,
             DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                 button.text = "$dayOfMonth/${month + 1}/$year"
             },
@@ -62,6 +63,7 @@ class AddNewTask : BottomSheetDialogFragment() {
     fun showTimePicker(view: View, button: Button) {
         val timePickerDialog = TimePickerDialog(
             requireContext(),
+            R.style.CustomDatePicker,
             TimePickerDialog.OnTimeSetListener { view, hourOfDay, minute ->
                 button.text = "$hourOfDay:$minute"
             },
