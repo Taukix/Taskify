@@ -8,7 +8,6 @@
     android:backgroundTint="#01001A"
     tools:context=".MainActivity">
 
-
     <TextView
         android:id="@+id/todayTask"
         android:layout_width="wrap_content"

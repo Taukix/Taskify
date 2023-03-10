@@ -7,7 +7,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.annotation.Nullable
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
 class AddNewTask : BottomSheetDialogFragment() {
@@ -25,15 +24,13 @@ class AddNewTask : BottomSheetDialogFragment() {
         }
     }
 
-    override fun onCreate(@Nullable savedInstanceState: Bundle?) {
+    override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, R.style.DialogStyle)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var view: View =
-            inflater.inflate(R.layout.add_task, container, false)
-        dialog?.window?.setSoftInputMode(android.view.WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE)
+        var view: View = inflater.inflate(R.layout.add_task, container, false)
 
         buttonStartingDate = view.findViewById(R.id.buttonStartingDate)
         buttonStartingDate.setOnClickListener{ showDatePicker(it, buttonStartingDate) }

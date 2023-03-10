@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/cardView"
     android:layout_width="match_parent"
-    android:layout_height="410sp"
+    android:layout_height="480sp"
     android:layout_margin="8dp">
 
     <LinearLayout
@@ -119,19 +119,21 @@
             <Button
                 android:id="@+id/buttonStartingDate"
                 android:layout_width="185dp"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="2sp"
                 android:background="@drawable/shapes"
-                android:text="01/01/2023" />
+                android:text="01/01/2023"
+                android:textColor="@color/black" />
 
 
             <Button
                 android:id="@+id/buttonEndingDate"
                 android:layout_width="180dp"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="2sp"
                 android:text="01/01/2023"
-                android:background="@drawable/shapes" />
+                android:background="@drawable/shapes"
+                android:textColor="@color/black"/>
 
         </LinearLayout>
 
@@ -153,20 +155,32 @@
             <Button
                 android:id="@+id/buttonReminderDate"
                 android:layout_width="185dp"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="2sp"
                 android:background="@drawable/shapes"
-                android:text="01/01/2023" />
+                android:text="01/01/2023"
+                android:textColor="@color/black"/>
 
             <Button
                 android:id="@+id/buttonReminderTime"
                 android:layout_width="180dp"
-                android:layout_height="40dp"
+                android:layout_height="48dp"
                 android:layout_marginLeft="2sp"
                 android:text="10:00 AM"
-                android:background="@drawable/shapes" />
+                android:background="@drawable/shapes"
+                android:textColor="@color/black"/>
 
         </LinearLayout>
+
+        <Button
+            android:layout_width="100dp"
+            android:layout_height="48dp"
+            android:layout_marginLeft="135sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:background="@drawable/shapes"
+            android:text="Valider"
+            android:textColor="@color/black"/>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>
