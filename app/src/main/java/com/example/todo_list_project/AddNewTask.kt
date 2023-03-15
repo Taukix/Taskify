@@ -65,6 +65,8 @@ class AddNewTask : BottomSheetDialogFragment() {
             db.close()
             MainActivity.taskList.add(task)
             MainActivity.taskAdapter.notifyItemInserted(MainActivity.taskList.size - 1)
+
+            dismiss()
         }
         return view
     }

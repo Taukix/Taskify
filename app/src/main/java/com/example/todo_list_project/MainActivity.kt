@@ -3,6 +3,7 @@ package com.example.todo_list_project
 import TaskAdapter
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -12,7 +13,7 @@ import net.penguincoders.doit.Utils.DatabaseHandler
 
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var addTaskButton: FloatingActionButton
+    private lateinit var addTaskButton: ImageView
 
     companion object {
         var taskList = mutableListOf<Task>()
@@ -29,7 +30,7 @@ class MainActivity : AppCompatActivity() {
 
         // Initialise notre liste de tâches
         for (i in 0 until db.getAllTask().size) {
-            taskList.add(db.getAllTask()[i.toInt()])
+            taskList.add(db.getAllTask()[i])
         }
 
         // Initialise notre RecyclerView
@@ -46,5 +47,4 @@ class MainActivity : AppCompatActivity() {
     }
 
     //----------------------------------------------------------------------------------------------
-
 }

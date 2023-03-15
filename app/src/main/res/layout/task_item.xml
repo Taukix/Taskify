@@ -29,6 +29,7 @@
                 android:src="@drawable/check" />
 
             <ImageView
+                android:id="@+id/deleteButton"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_marginStart="10dp"
@@ -67,7 +68,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10sp"
-                android:layout_weight="1"
                 android:text="@string/starting_date"
                 android:textStyle="bold" />
 
@@ -75,10 +75,9 @@
                 android:id="@+id/endingDateTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_marginStart="105sp"
                 android:text="@string/ending_date"
-                android:textStyle="bold"
-                android:layout_marginStart="10sp" />
+                android:textStyle="bold" />
         </LinearLayout>
 
         <LinearLayout
@@ -88,15 +87,15 @@
 
             <TextView
                 android:id="@+id/textStartingDate"
-                android:layout_width="200sp"
+                android:layout_width="189dp"
                 android:layout_height="wrap_content"
                 android:padding="10sp" />
 
             <TextView
                 android:id="@+id/textEndingDate"
-                android:layout_width="200sp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="textStart"
+                android:gravity="start"
                 android:padding="10sp" />
 
         </LinearLayout>
