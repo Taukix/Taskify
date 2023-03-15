@@ -18,10 +18,10 @@
             android:id="@+id/mainTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="120sp"
+            android:layout_marginStart="120sp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
-            android:text="Create a new Task"
+            android:text="@string/create_a_new_task"
             android:textSize="18sp"
             android:textStyle="bold"
             android:textColor="@color/black"/>
@@ -30,7 +30,7 @@
             android:id="@+id/titleOfTask"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Title"
+            android:text="@string/title"
             android:textStyle="bold"
             android:textColor="@color/black"/>
 
@@ -49,7 +49,7 @@
                 android:layout_marginTop="10sp"
                 android:background="@drawable/shapes"
                 android:padding="1dp"
-                android:hint="Enter Title"
+                android:hint="@string/enter_title"
                 android:inputType="text"
                 android:backgroundTint="#01001A"
                 android:textColor="@color/white"/>
@@ -60,7 +60,7 @@
             android:id="@+id/descriptionTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Description"
+            android:text="@string/description"
             android:textStyle="bold"
             android:textColor="@color/black"/>
 
@@ -78,7 +78,7 @@
                 android:layout_height="35dp"
                 android:background="@drawable/shapes"
                 android:padding="1dp"
-                android:hint="Enter Description"
+                android:hint="@string/enter_description"
                 android:inputType="text"
                 android:backgroundTint="#01001A"
                 android:textColor="@color/white"/>
@@ -95,7 +95,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Starting Date"
+                android:text="@string/starting_date"
                 android:textStyle="bold"
                 android:textColor="@color/black"/>
 
@@ -104,7 +104,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Ending Date"
+                android:text="@string/ending_date"
                 android:textStyle="bold"
                 android:textColor="@color/black" />
         </LinearLayout>
@@ -120,9 +120,9 @@
                 android:id="@+id/buttonStartingDate"
                 android:layout_width="185dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="2sp"
+                android:layout_marginStart="2sp"
                 android:background="@drawable/shapes"
-                android:text="01/01/2023"
+                android:text="@string/_01_01_2023"
                 android:textColor="@color/black" />
 
 
@@ -130,8 +130,8 @@
                 android:id="@+id/buttonEndingDate"
                 android:layout_width="180dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="2sp"
-                android:text="01/01/2023"
+                android:layout_marginStart="2sp"
+                android:text="@string/_01_01_2023"
                 android:background="@drawable/shapes"
                 android:textColor="@color/black"/>
 
@@ -141,7 +141,7 @@
             android:id="@+id/reminderTitle"
             android:layout_width="376dp"
             android:layout_height="wrap_content"
-            android:text="Reminder"
+            android:text="@string/reminder"
             android:textColor="@color/black"
             android:textStyle="bold" />
 
@@ -156,17 +156,17 @@
                 android:id="@+id/buttonReminderDate"
                 android:layout_width="185dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="2sp"
+                android:layout_marginStart="2sp"
                 android:background="@drawable/shapes"
-                android:text="01/01/2023"
+                android:text="@string/_01_01_2023"
                 android:textColor="@color/black"/>
 
             <Button
                 android:id="@+id/buttonReminderTime"
                 android:layout_width="180dp"
                 android:layout_height="48dp"
-                android:layout_marginLeft="2sp"
-                android:text="10:00 AM"
+                android:layout_marginStart="2sp"
+                android:text="@string/_10_00_am"
                 android:background="@drawable/shapes"
                 android:textColor="@color/black"/>
 
@@ -176,11 +176,11 @@
             android:id="@+id/validateButton"
             android:layout_width="100dp"
             android:layout_height="48dp"
-            android:layout_marginLeft="140dp"
+            android:layout_marginStart="140dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/shapes"
-            android:text="Valider"
+            android:text="@string/valider"
             android:textColor="@color/black" />
 
     </LinearLayout>

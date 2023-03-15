@@ -12,21 +12,33 @@
         android:id="@+id/todayTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Today's Tasks"
+        android:text="@string/today_s_tasks"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
-        android:textStyle="bold|italic"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.116"
+        app:layout_constraintHorizontal_bias="0.114"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.068" />
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listOfTask"
+        android:id="@+id/listOfTaskNotDone"
         android:layout_width="347dp"
         android:layout_height="506dp"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.476"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/listOfTaskDone"
+        android:layout_width="347dp"
+        android:layout_height="506dp"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.476"
@@ -37,13 +49,28 @@
         android:id="@+id/btnAddTaskPage"
         android:layout_width="73dp"
         android:layout_height="58dp"
-        android:contentDescription="Button that give access to add a new task"
-        android:onClick="addTaskPage"
+        android:contentDescription="@string/button_that_give_access_to_add_a_new_task"
         android:src="@drawable/add_button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/listOfTask"
-        app:layout_constraintVertical_bias="0.642" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.958" />
+
+    <Button
+        android:id="@+id/btnDone"
+        android:layout_width="96dp"
+        android:layout_height="33dp"
+        android:backgroundTint="@color/blue"
+        android:text="@string/done"
+        android:textColor="@color/white"
+        android:textSize="11sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.901"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.069" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

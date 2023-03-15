@@ -8,5 +8,6 @@ class Task(
     var description: String,
     var startingDate: Date?,
     var endingDate: Date?,
-    var reminder: Date?) {
+    var reminder: Date?,
+    var isDone: Int) {
 }

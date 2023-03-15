@@ -37,8 +37,9 @@ class AddNewTask : BottomSheetDialogFragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        var view: View = inflater.inflate(R.layout.add_task, container, false)
+        val view: View = inflater.inflate(R.layout.add_task, container, false)
 
+        val notDoneNumber = -1
         val format = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
         val formatComplete = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.FRANCE)
 
@@ -55,16 +56,17 @@ class AddNewTask : BottomSheetDialogFragment() {
             val title = view.findViewById<TextInputEditText>(R.id.editInputTextTitleOfTask)
             val description = view.findViewById<TextInputEditText>(R.id.editInputDescriptionOfTask)
             val db = DatabaseHandler.DbReaderHelper(requireContext())
-            val task = Task(null,
+            val task = Task(db.getAllTasks().size + 1,
                 title.text.toString(),
                 description.text.toString(),
                 format.parse(buttonStartingDate.text.toString()),
                 format.parse(buttonEndingDate.text.toString()),
-                formatComplete.parse(buttonReminderDate.text.toString() + " " + buttonReminderTime.text.toString()))
+                formatComplete.parse(buttonReminderDate.text.toString() + " " + buttonReminderTime.text.toString()),
+                notDoneNumber)
             db.addTask(task)
             db.close()
-            MainActivity.taskList.add(task)
-            MainActivity.taskAdapter.notifyItemInserted(MainActivity.taskList.size - 1)
+            MainActivity.taskNotDoneList.add(task)
+            MainActivity.taskNotDoneAdapter.notifyItemInserted(MainActivity.taskNotDoneList.size - 1)
 
             dismiss()
         }
