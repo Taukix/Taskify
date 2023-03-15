@@ -73,7 +73,7 @@
             app:boxBackgroundMode="none">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/titleOfTaskEditText"
+                android:id="@+id/editInputDescriptionOfTask"
                 android:layout_width="370dp"
                 android:layout_height="35dp"
                 android:background="@drawable/shapes"
@@ -173,14 +173,15 @@
         </LinearLayout>
 
         <Button
+            android:id="@+id/validateButton"
             android:layout_width="100dp"
             android:layout_height="48dp"
-            android:layout_marginLeft="135sp"
+            android:layout_marginLeft="140dp"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:background="@drawable/shapes"
             android:text="Valider"
-            android:textColor="@color/black"/>
+            android:textColor="@color/black" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

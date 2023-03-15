@@ -18,31 +18,37 @@
             android:id="@+id/horizontalLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:paddingTop="16dp"
+            android:paddingBottom="16dp">
 
             <ImageView
-                android:layout_width="54dp"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/task" />
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/check" />
+
+            <ImageView
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_marginStart="10dp"
+                android:src="@drawable/effacer" />
 
             <TextView
                 android:id="@+id/textTitle"
-                android:layout_width="125dp"
-                android:layout_height="44dp"
-                android:layout_marginLeft="70sp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="32dp"
                 android:textSize="18sp"
-                android:textStyle="bold" />
+                android:textStyle="bold"
+                android:gravity="center"/>
         </LinearLayout>
 
         <TextView
             android:id="@+id/descriptionTitle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10sp"
-            android:text="Description"
+            android:layout_marginStart="10sp"
+            android:text="@string/description"
             android:textStyle="bold" />
 
         <TextView
@@ -60,19 +66,19 @@
                 android:id="@+id/startingDateTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="10sp"
                 android:layout_weight="1"
-                android:text="Starting Date"
-                android:textStyle="bold"
-                android:layout_marginLeft="10sp"/>
+                android:text="@string/starting_date"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/endingDateTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Ending Date"
+                android:text="@string/ending_date"
                 android:textStyle="bold"
-                android:layout_marginLeft="10sp" />
+                android:layout_marginStart="10sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -90,6 +96,7 @@
                 android:id="@+id/textEndingDate"
                 android:layout_width="200sp"
                 android:layout_height="wrap_content"
+                android:textAlignment="textStart"
                 android:padding="10sp" />
 
         </LinearLayout>
@@ -97,11 +104,11 @@
         <TextView
             android:id="@+id/reminderTitle"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="1"
-            android:text="Reminder"
+            android:text="@string/reminder"
             android:textStyle="bold"
-            android:layout_marginLeft="10sp" />
+            android:layout_marginStart="10sp" />
 
         <TextView
             android:id="@+id/textReminder"

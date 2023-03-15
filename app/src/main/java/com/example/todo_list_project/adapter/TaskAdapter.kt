@@ -1,6 +1,8 @@
 import android.animation.Animator
 import android.animation.AnimatorListenerAdapter
 import android.animation.ValueAnimator
+import android.icu.text.SimpleDateFormat
+import android.net.ParseException
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_list_project.MainActivity
 import com.example.todo_list_project.R
 import com.example.todo_list_project.classes.Task
+import java.util.*
 
 class TaskAdapter(private val taskList: List<Task>) : RecyclerView.Adapter<TaskAdapter.ViewHolder>() {
 
@@ -38,11 +41,14 @@ class TaskAdapter(private val taskList: List<Task>) : RecyclerView.Adapter<TaskA
         private val reminder: TextView = itemView.findViewById(R.id.textReminder)
 
         fun bind(task: Task) {
+            val outputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
+            val outputFormatTime = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.FRANCE)
+
             title.text = task.title
             description.text = task.description
-            startingDate.text = task.startingDate.toString()
-            endingDate.text = task.endingDate.toString()
-            reminder.text = task.reminder.toString()
+            startingDate.text = outputFormat.format(task.startingDate)
+            endingDate.text = outputFormat.format(task.endingDate)
+            reminder.text = outputFormatTime.format(task.reminder)
         }
     }
 }
