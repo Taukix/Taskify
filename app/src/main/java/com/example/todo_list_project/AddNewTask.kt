@@ -1,7 +1,9 @@
 package com.example.todo_list_project
 
-import android.app.DatePickerDialog
-import android.app.TimePickerDialog
+import android.annotation.SuppressLint
+import android.app.*
+import android.content.Context
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -22,6 +24,7 @@ class AddNewTask : BottomSheetDialogFragment() {
     private lateinit var buttonReminderDate: Button
     private lateinit var buttonReminderTime: Button
     private lateinit var validateButton: Button
+    private lateinit var stateButton: Button
 
     companion object {
         const val TAG = "AddNewTask"
@@ -38,6 +41,7 @@ class AddNewTask : BottomSheetDialogFragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view: View = inflater.inflate(R.layout.add_task, container, false)
+        val taskView: View = inflater.inflate(R.layout.task_not_done_item, container, false)
 
         val notDoneNumber = -1
         val format = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
@@ -51,20 +55,29 @@ class AddNewTask : BottomSheetDialogFragment() {
         buttonReminderDate.setOnClickListener{ showDatePicker(it, buttonReminderDate) }
         buttonReminderTime = view.findViewById(R.id.buttonReminderTime)
         buttonReminderTime.setOnClickListener{ showTimePicker(it, buttonReminderTime) }
+        stateButton = taskView.findViewById(R.id.stateButton)
         validateButton = view.findViewById(R.id.validateButton)
         validateButton.setOnClickListener {
             val title = view.findViewById<TextInputEditText>(R.id.editInputTextTitleOfTask)
             val description = view.findViewById<TextInputEditText>(R.id.editInputDescriptionOfTask)
+            val startingDateText = format.parse(buttonStartingDate.text.toString())
+            val endingDateText = format.parse(buttonEndingDate.text.toString())
+            val reminderDateText = formatComplete.parse(buttonReminderDate.text.toString() + " " + buttonReminderTime.text.toString())
+
             val db = DatabaseHandler.DbReaderHelper(requireContext())
             val task = Task(db.getAllTasks().size + 1,
                 title.text.toString(),
                 description.text.toString(),
-                format.parse(buttonStartingDate.text.toString()),
-                format.parse(buttonEndingDate.text.toString()),
-                formatComplete.parse(buttonReminderDate.text.toString() + " " + buttonReminderTime.text.toString()),
+                startingDateText,
+                endingDateText,
+                reminderDateText,
                 notDoneNumber)
             db.addTask(task)
             db.close()
+
+            scheduleNotification(endingDateText!!, task.title, task.description, true)
+            scheduleNotification(reminderDateText!!, task.title, task.description, false)
+
             MainActivity.taskNotDoneList.add(task)
             MainActivity.taskNotDoneAdapter.notifyItemInserted(MainActivity.taskNotDoneList.size - 1)
 
@@ -80,7 +93,7 @@ class AddNewTask : BottomSheetDialogFragment() {
             DatePickerDialog.OnDateSetListener { view, year, month, dayOfMonth ->
                 button.text = "$dayOfMonth/${month + 1}/$year"
             },
-            2021,
+            2023,
             0,
             1
         )
@@ -99,5 +112,18 @@ class AddNewTask : BottomSheetDialogFragment() {
             true
         )
         timePickerDialog.show()
+    }
+
+    @SuppressLint("UnspecifiedImmutableFlag")
+    private fun scheduleNotification(endDate: Date, title: String, description: String, state: Boolean) {
+        val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
+        val intent = Intent(requireContext(), NotificationReceiver::class.java)
+        intent.putExtra("title", title)
+        intent.putExtra("description", description)
+        intent.putExtra("state", state)
+        val pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP, endDate.time, pendingIntent)
+        Log.d(TAG, "scheduleNotification: $endDate")
+        Log.d(TAG, "Time : " + Calendar.getInstance().time)
     }
 }

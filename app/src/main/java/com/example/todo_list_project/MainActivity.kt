@@ -62,21 +62,20 @@ class MainActivity : AppCompatActivity() {
         // Action du bouton Done
         doneTaskButton = findViewById(R.id.btnDone)
         doneTaskButton.setOnClickListener(View.OnClickListener {
-            if (doneTaskButton.text == "Done") {
+            if (doneTaskButton.text == "Not Done") {
                 recyclerViewNotDone.visibility = View.GONE
                 recyclerViewDone.visibility = View.VISIBLE
-                doneTaskButton.text = "Not Done"
+                doneTaskButton.text = "Done"
                 doneTaskButton.setBackgroundColor(resources.getColor(R.color.white))
                 doneTaskButton.setTextColor(resources.getColor(R.color.black))
             } else {
                 recyclerViewNotDone.visibility = View.VISIBLE
                 recyclerViewDone.visibility = View.GONE
-                doneTaskButton.text = "Done"
+                doneTaskButton.text = "Not Done"
                 doneTaskButton.setBackgroundColor(resources.getColor(R.color.blue))
                 doneTaskButton.setTextColor(resources.getColor(R.color.white))
             }
         })
-
     }
 
     //----------------------------------------------------------------------------------------------
