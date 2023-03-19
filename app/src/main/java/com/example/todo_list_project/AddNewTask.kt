@@ -75,8 +75,8 @@ class AddNewTask : BottomSheetDialogFragment() {
             db.addTask(task)
             db.close()
 
-            scheduleNotification(endingDateText!!, task.title, task.description, true)
-            scheduleNotification(reminderDateText!!, task.title, task.description, false)
+            scheduleNotification(endingDateText!!, task.id , true)
+            scheduleNotification(reminderDateText!!, task.id, true)
 
             MainActivity.taskNotDoneList.add(task)
             MainActivity.taskNotDoneAdapter.notifyItemInserted(MainActivity.taskNotDoneList.size - 1)
@@ -115,11 +115,10 @@ class AddNewTask : BottomSheetDialogFragment() {
     }
 
     @SuppressLint("UnspecifiedImmutableFlag")
-    private fun scheduleNotification(endDate: Date, title: String, description: String, state: Boolean) {
+    private fun scheduleNotification(endDate: Date, taskId: Int, state: Boolean) {
         val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(requireContext(), NotificationReceiver::class.java)
-        intent.putExtra("title", title)
-        intent.putExtra("description", description)
+        intent.putExtra("taskId", taskId)
         intent.putExtra("state", state)
         val pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, endDate.time, pendingIntent)

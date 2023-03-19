@@ -9,16 +9,28 @@ import android.os.Build
 import android.util.Log
 import android.view.View
 import androidx.core.app.NotificationCompat
+import androidx.core.content.ContentProviderCompat.requireContext
+import com.example.todo_list_project.classes.Task
+import net.penguincoders.doit.Utils.DatabaseHandler
 
 class NotificationReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         Log.d("TAG", "Alarme déclenchée")
-        val title = intent.getStringExtra("title") ?: "Titre par défaut"
-        val description = intent.getStringExtra("description") ?: "Description par défaut"
+        val db = DatabaseHandler.DbReaderHelper(context)
+        val taskId = intent.getIntExtra("taskId", 0)
         val state = intent.getBooleanExtra("state", false)
+        var title = ""
+        var description = ""
 
-        val view = View.inflate(context, R.layout.task_not_done_item, null)
+        for (task in MainActivity.taskNotDoneList) {
+            if (task.id == taskId && state) {
+                task.isLate = true
+                MainActivity.taskNotDoneAdapter.notifyItemChanged(task.id - 1)
+                title = task.title
+                description = task.description
+            }
+        }
 
         // Créer la notification avec le titre et la description de la tâche
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager

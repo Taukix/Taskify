@@ -4,11 +4,12 @@ import android.graphics.Color
 import java.util.Date
 
 class Task(
-    var id: Int?,
-    var title: String,
-    var description: String,
-    var startingDate: Date?,
-    var endingDate: Date?,
-    var reminder: Date?,
-    var isDone: Int) {
+    val id: Int,
+    val title: String,
+    val description: String,
+    val startingDate: Date?,
+    val endingDate: Date?,
+    val reminder: Date?,
+    val isDone: Int,
+    var isLate: Boolean = false) {
 }

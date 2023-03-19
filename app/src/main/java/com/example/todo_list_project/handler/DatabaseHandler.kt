@@ -229,7 +229,7 @@ object DatabaseHandler {
                 null                    // The sort order
             )
 
-            var task = Task(null, "", "", Date(), Date(), Date(), 0)
+            var task = Task(0, "", "", Date(), Date(), Date(), 0)
             with(cursor) {
                 if (moveToFirst()) {
                     val taskTitle = getString(getColumnIndexOrThrow(FeedEntry.COLUMN_NAME_TITLE))
@@ -280,7 +280,7 @@ object DatabaseHandler {
                 null                    // The sort order
             )
 
-            var task = Task(null, "", "", Date(), Date(), Date(), 0)
+            var task = Task(0, "", "", Date(), Date(), Date(), 0)
             with(cursor) {
                 if (moveToFirst()) {
                     val taskTitle =

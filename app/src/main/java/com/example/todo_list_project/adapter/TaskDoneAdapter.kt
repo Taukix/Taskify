@@ -52,8 +52,6 @@ class TaskDoneAdapter(private val taskList: List<Task>) : RecyclerView.Adapter<T
             deleteTaskIcon.setOnClickListener {
                 val db = DatabaseHandler.DbReaderHelper(itemView.context)
                 task.id?.let { it1 -> db.deleteTask(it1) }
-                Log.d("delete", db.getAllTasks().size.toString())
-                Log.d("taskID", task.id.toString())
                 db.close()
                 MainActivity.taskDoneList.remove(task)
                 MainActivity.taskDoneAdapter.notifyItemRemoved(adapterPosition)

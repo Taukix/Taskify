@@ -1,5 +1,6 @@
 package com.example.todo_list_project.adapter
 
+import android.graphics.Color
 import android.icu.text.SimpleDateFormat
 import android.util.Log
 import android.view.LayoutInflater
@@ -41,6 +42,7 @@ class TaskNotDoneAdapter(private val taskList: List<Task>) : RecyclerView.Adapte
         private val reminder: TextView = itemView.findViewById(R.id.textReminder)
         private val validTaskIcon: ImageView = itemView.findViewById(R.id.validButton)
         private val deleteTaskIcon: ImageView = itemView.findViewById(R.id.deleteButton)
+        private val stateButton : Button = itemView.findViewById(R.id.stateButton)
 
         fun bind(task: Task) {
             val outputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
@@ -69,6 +71,11 @@ class TaskNotDoneAdapter(private val taskList: List<Task>) : RecyclerView.Adapte
                 db.close()
                 MainActivity.taskNotDoneList.remove(task)
                 MainActivity.taskNotDoneAdapter.notifyItemRemoved(adapterPosition)
+            }
+
+            if (task.isLate) {
+                Log.d("late", "late")
+                stateButton.setBackgroundColor(Color.RED)
             }
         }
     }
