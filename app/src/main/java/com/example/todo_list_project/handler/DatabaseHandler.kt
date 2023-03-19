@@ -1,4 +1,4 @@
-package net.penguincoders.doit.Utils
+package com.example.todo_list_project.handler
 
 import android.content.ContentValues
 import android.content.Context
@@ -8,7 +8,6 @@ import android.icu.text.SimpleDateFormat
 import android.provider.BaseColumns
 import android.util.Log
 import com.example.todo_list_project.classes.Task
-import java.lang.reflect.Array.getBoolean
 import java.util.*
 
 object DatabaseHandler {
@@ -83,7 +82,8 @@ object DatabaseHandler {
                 FeedEntry.COLUMN_NAME_STARTING_DATE,
                 FeedEntry.COLUMN_NAME_ENDING_DATE,
                 FeedEntry.COLUMN_NAME_REMINDER,
-                FeedEntry.COLUMN_NAME_IS_DONE)
+                FeedEntry.COLUMN_NAME_IS_DONE
+            )
 
             val sortOrder = "${BaseColumns._ID} DESC"
 
@@ -124,7 +124,8 @@ object DatabaseHandler {
                 FeedEntry.COLUMN_NAME_STARTING_DATE,
                 FeedEntry.COLUMN_NAME_ENDING_DATE,
                 FeedEntry.COLUMN_NAME_REMINDER,
-                FeedEntry.COLUMN_NAME_IS_DONE)
+                FeedEntry.COLUMN_NAME_IS_DONE
+            )
 
             val selection = "${FeedEntry.COLUMN_NAME_IS_DONE} = ?"
             val selectionArgs = arrayOf("-1")
@@ -168,7 +169,8 @@ object DatabaseHandler {
                 FeedEntry.COLUMN_NAME_STARTING_DATE,
                 FeedEntry.COLUMN_NAME_ENDING_DATE,
                 FeedEntry.COLUMN_NAME_REMINDER,
-                FeedEntry.COLUMN_NAME_IS_DONE)
+                FeedEntry.COLUMN_NAME_IS_DONE
+            )
 
             val selection = "${FeedEntry.COLUMN_NAME_IS_DONE} = ?"
             val selectionArgs = arrayOf("1")
@@ -297,7 +299,7 @@ object DatabaseHandler {
                         getInt(getColumnIndexOrThrow(FeedEntry.COLUMN_NAME_IS_DONE))
 
                     task = Task(
-                        taskId.toInt(),
+                        taskId,
                         taskTitle,
                         taskDescription,
                         format.parse(taskStartingDate),
@@ -332,7 +334,7 @@ object DatabaseHandler {
             val selection = "${BaseColumns._ID} LIKE ?"
             val selectionArgs = arrayOf(id.toString())
 
-            val count = db.update(
+            db.update(
                 FeedEntry.TABLE_NAME,
                 values,
                 selection,
@@ -353,7 +355,7 @@ object DatabaseHandler {
             val selection = "${BaseColumns._ID} LIKE ?"
             val selectionArgs = arrayOf(id.toString())
 
-            val count = db.update(
+            db.update(
                 FeedEntry.TABLE_NAME,
                 values,
                 selection,

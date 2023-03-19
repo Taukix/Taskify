@@ -10,11 +10,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import androidx.core.content.ContextCompat.getSystemService
 import com.example.todo_list_project.classes.Task
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
-import net.penguincoders.doit.Utils.DatabaseHandler
+import com.example.todo_list_project.handler.DatabaseHandler
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -34,6 +33,7 @@ class AddNewTask : BottomSheetDialogFragment() {
             return AddNewTask()
         }
 
+        @SuppressLint("UnspecifiedImmutableFlag")
         fun cancelAlarm(context: Context, requestCode: Int) {
             val intent = Intent(context, NotificationReceiver::class.java)
             val pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, 0)
@@ -47,7 +47,7 @@ class AddNewTask : BottomSheetDialogFragment() {
         setStyle(STYLE_NORMAL, R.style.DialogStyle)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         val view: View = inflater.inflate(R.layout.add_task, container, false)
         val taskView: View = inflater.inflate(R.layout.task_not_done_item, container, false)
 
@@ -83,8 +83,8 @@ class AddNewTask : BottomSheetDialogFragment() {
             db.addTask(task)
             db.close()
 
-            scheduleNotification(endingDateText!!, task.id , true)
-            scheduleNotification(reminderDateText!!, task.id+100, false)
+            scheduleNotification(endingDateText!!, task.id , true, task.id)
+            scheduleNotification(reminderDateText!!, task.id, false, task.id+100)
 
             MainActivity.taskNotDoneList.add(task)
             MainActivity.taskNotDoneAdapter.notifyItemInserted(MainActivity.taskNotDoneList.size - 1)
@@ -94,6 +94,7 @@ class AddNewTask : BottomSheetDialogFragment() {
         return view
     }
 
+    @SuppressLint("SetTextI18n")
     fun showDatePicker(view: View, button: Button) {
         val datePickerDialog = DatePickerDialog(
             requireContext(),
@@ -108,6 +109,7 @@ class AddNewTask : BottomSheetDialogFragment() {
         datePickerDialog.show()
     }
 
+    @SuppressLint("SetTextI18n")
     fun showTimePicker(view: View, button: Button) {
         val timePickerDialog = TimePickerDialog(
             requireContext(),
@@ -123,14 +125,14 @@ class AddNewTask : BottomSheetDialogFragment() {
     }
 
     @SuppressLint("UnspecifiedImmutableFlag")
-    private fun scheduleNotification(endDate: Date, taskId: Int, state: Boolean) {
+    private fun scheduleNotification(endDate: Date, taskId: Int, state: Boolean, requestCode: Int) {
         val alarmManager = requireContext().getSystemService(Context.ALARM_SERVICE) as AlarmManager
         val intent = Intent(requireContext(), NotificationReceiver::class.java)
         intent.putExtra("taskId", taskId)
         intent.putExtra("state", state)
         val pendingIntent = PendingIntent.getBroadcast(
             requireContext(),
-            taskId,
+            requestCode,
             intent,
             PendingIntent.FLAG_UPDATE_CURRENT
         )

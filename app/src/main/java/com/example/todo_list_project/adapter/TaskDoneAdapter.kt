@@ -1,7 +1,5 @@
 package com.example.todo_list_project.adapter
 
-import android.icu.text.SimpleDateFormat
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,7 +11,7 @@ import com.example.todo_list_project.AddNewTask
 import com.example.todo_list_project.MainActivity
 import com.example.todo_list_project.R
 import com.example.todo_list_project.classes.Task
-import net.penguincoders.doit.Utils.DatabaseHandler
+import com.example.todo_list_project.handler.DatabaseHandler
 
 class TaskDoneAdapter(private val taskList: List<Task>) : RecyclerView.Adapter<TaskDoneAdapter.ViewHolder>() {
 
@@ -42,7 +40,7 @@ class TaskDoneAdapter(private val taskList: List<Task>) : RecyclerView.Adapter<T
 
             backTaskIcon.setOnClickListener {
                 val db = DatabaseHandler.DbReaderHelper(itemView.context)
-                task.id?.let { it1 -> db.updateTaskToNotDone(it1) }
+                task.id.let { it1 -> db.updateTaskToNotDone(it1) }
                 db.close()
                 MainActivity.taskDoneList.remove(task)
                 MainActivity.taskDoneAdapter.notifyItemRemoved(adapterPosition)
@@ -52,7 +50,7 @@ class TaskDoneAdapter(private val taskList: List<Task>) : RecyclerView.Adapter<T
 
             deleteTaskIcon.setOnClickListener {
                 val db = DatabaseHandler.DbReaderHelper(itemView.context)
-                task.id?.let { it1 -> db.deleteTask(it1) }
+                task.id.let { it1 -> db.deleteTask(it1) }
                 db.close()
                 MainActivity.taskDoneList.remove(task)
                 MainActivity.taskDoneAdapter.notifyItemRemoved(adapterPosition)

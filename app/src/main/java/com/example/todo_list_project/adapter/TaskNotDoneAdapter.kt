@@ -1,10 +1,5 @@
 package com.example.todo_list_project.adapter
 
-import android.annotation.SuppressLint
-import android.app.AlarmManager
-import android.app.PendingIntent
-import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.icu.text.SimpleDateFormat
 import android.util.Log
@@ -15,14 +10,12 @@ import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_list_project.AddNewTask
 import com.example.todo_list_project.MainActivity
-import com.example.todo_list_project.NotificationReceiver
 import com.example.todo_list_project.R
 import com.example.todo_list_project.classes.Task
-import net.penguincoders.doit.Utils.DatabaseHandler
+import com.example.todo_list_project.handler.DatabaseHandler
 import java.util.*
 
 class TaskNotDoneAdapter(private val taskList: List<Task>) : RecyclerView.Adapter<TaskNotDoneAdapter.ViewHolder>() {
@@ -64,7 +57,7 @@ class TaskNotDoneAdapter(private val taskList: List<Task>) : RecyclerView.Adapte
 
             validTaskIcon.setOnClickListener {
                 val db = DatabaseHandler.DbReaderHelper(itemView.context)
-                task.id?.let { it1 -> db.updateTaskToDone(it1) }
+                task.id.let { it1 -> db.updateTaskToDone(it1) }
                 db.close()
                 MainActivity.taskNotDoneList.remove(task)
                 MainActivity.taskNotDoneAdapter.notifyItemRemoved(adapterPosition)
@@ -74,7 +67,7 @@ class TaskNotDoneAdapter(private val taskList: List<Task>) : RecyclerView.Adapte
 
             deleteTaskIcon.setOnClickListener {
                 val db = DatabaseHandler.DbReaderHelper(itemView.context)
-                task.id?.let { it1 -> db.deleteTask(it1) }
+                task.id.let { it1 -> db.deleteTask(it1) }
                 Log.d("delete", db.getAllTasks().size.toString())
                 db.close()
                 MainActivity.taskNotDoneList.remove(task)

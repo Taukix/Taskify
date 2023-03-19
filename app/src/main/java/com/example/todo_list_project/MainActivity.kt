@@ -1,5 +1,6 @@
 package com.example.todo_list_project
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,7 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_list_project.adapter.TaskDoneAdapter
 import com.example.todo_list_project.adapter.TaskNotDoneAdapter
 import com.example.todo_list_project.classes.Task
-import net.penguincoders.doit.Utils.DatabaseHandler
+import com.example.todo_list_project.handler.DatabaseHandler
 
 
 class MainActivity : AppCompatActivity() {
@@ -25,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         var taskDoneAdapter: TaskDoneAdapter = TaskDoneAdapter(taskDoneList)
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)

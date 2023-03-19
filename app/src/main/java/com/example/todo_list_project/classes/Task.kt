@@ -1,6 +1,5 @@
 package com.example.todo_list_project.classes
 
-import android.graphics.Color
 import java.util.Date
 
 class Task(

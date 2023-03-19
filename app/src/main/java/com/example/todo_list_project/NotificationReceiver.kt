@@ -7,17 +7,13 @@ import android.content.Context
 import android.content.Intent
 import android.os.Build
 import android.util.Log
-import android.view.View
 import androidx.core.app.NotificationCompat
-import androidx.core.content.ContentProviderCompat.requireContext
-import com.example.todo_list_project.classes.Task
-import net.penguincoders.doit.Utils.DatabaseHandler
+import com.example.todo_list_project.handler.DatabaseHandler
 
 class NotificationReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         Log.d("TAG", "Alarme déclenchée")
-        val db = DatabaseHandler.DbReaderHelper(context)
         val taskId = intent.getIntExtra("taskId", 0)
         val state = intent.getBooleanExtra("state", false)
         var title = ""
@@ -28,8 +24,11 @@ class NotificationReceiver : BroadcastReceiver() {
                 if (state) {
                     task.isLate = true
                     MainActivity.taskNotDoneAdapter.notifyItemChanged(task.id - 1)
+                    title = "You are late on the task: "
+                } else {
+                    title = "You have a task to do: "
                 }
-                title = task.title
+                title += task.title
                 description = task.description
             }
         }
