@@ -1,5 +1,10 @@
 package com.example.todo_list_project.adapter
 
+import android.annotation.SuppressLint
+import android.app.AlarmManager
+import android.app.PendingIntent
+import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.icu.text.SimpleDateFormat
 import android.util.Log
@@ -10,8 +15,11 @@ import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todo_list_project.AddNewTask
 import com.example.todo_list_project.MainActivity
+import com.example.todo_list_project.NotificationReceiver
 import com.example.todo_list_project.R
 import com.example.todo_list_project.classes.Task
 import net.penguincoders.doit.Utils.DatabaseHandler
@@ -42,7 +50,7 @@ class TaskNotDoneAdapter(private val taskList: List<Task>) : RecyclerView.Adapte
         private val reminder: TextView = itemView.findViewById(R.id.textReminder)
         private val validTaskIcon: ImageView = itemView.findViewById(R.id.validButton)
         private val deleteTaskIcon: ImageView = itemView.findViewById(R.id.deleteButton)
-        private val stateButton : Button = itemView.findViewById(R.id.stateButton)
+        private val stateButton: Button = itemView.findViewById(R.id.stateButton)
 
         fun bind(task: Task) {
             val outputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
@@ -71,6 +79,9 @@ class TaskNotDoneAdapter(private val taskList: List<Task>) : RecyclerView.Adapte
                 db.close()
                 MainActivity.taskNotDoneList.remove(task)
                 MainActivity.taskNotDoneAdapter.notifyItemRemoved(adapterPosition)
+
+                AddNewTask.cancelAlarm(itemView.context, task.id)
+                AddNewTask.cancelAlarm(itemView.context, task.id+100)
             }
 
             if (task.isLate) {

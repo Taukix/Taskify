@@ -10,6 +10,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.content.ContextCompat.getSystemService
 import com.example.todo_list_project.classes.Task
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.android.material.textfield.TextInputEditText
@@ -31,6 +32,13 @@ class AddNewTask : BottomSheetDialogFragment() {
 
         fun newInstance(): AddNewTask {
             return AddNewTask()
+        }
+
+        fun cancelAlarm(context: Context, requestCode: Int) {
+            val intent = Intent(context, NotificationReceiver::class.java)
+            val pendingIntent = PendingIntent.getBroadcast(context, requestCode, intent, 0)
+            val alarmManager = context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+            alarmManager.cancel(pendingIntent)
         }
     }
 
@@ -76,7 +84,7 @@ class AddNewTask : BottomSheetDialogFragment() {
             db.close()
 
             scheduleNotification(endingDateText!!, task.id , true)
-            scheduleNotification(reminderDateText!!, task.id, true)
+            scheduleNotification(reminderDateText!!, task.id+100, false)
 
             MainActivity.taskNotDoneList.add(task)
             MainActivity.taskNotDoneAdapter.notifyItemInserted(MainActivity.taskNotDoneList.size - 1)
@@ -120,7 +128,12 @@ class AddNewTask : BottomSheetDialogFragment() {
         val intent = Intent(requireContext(), NotificationReceiver::class.java)
         intent.putExtra("taskId", taskId)
         intent.putExtra("state", state)
-        val pendingIntent = PendingIntent.getBroadcast(requireContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val pendingIntent = PendingIntent.getBroadcast(
+            requireContext(),
+            taskId,
+            intent,
+            PendingIntent.FLAG_UPDATE_CURRENT
+        )
         alarmManager.setExact(AlarmManager.RTC_WAKEUP, endDate.time, pendingIntent)
         Log.d(TAG, "scheduleNotification: $endDate")
         Log.d(TAG, "Time : " + Calendar.getInstance().time)

@@ -24,9 +24,11 @@ class NotificationReceiver : BroadcastReceiver() {
         var description = ""
 
         for (task in MainActivity.taskNotDoneList) {
-            if (task.id == taskId && state) {
-                task.isLate = true
-                MainActivity.taskNotDoneAdapter.notifyItemChanged(task.id - 1)
+            if (task.id == taskId) {
+                if (state) {
+                    task.isLate = true
+                    MainActivity.taskNotDoneAdapter.notifyItemChanged(task.id - 1)
+                }
                 title = task.title
                 description = task.description
             }

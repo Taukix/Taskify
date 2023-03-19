@@ -9,6 +9,7 @@ import android.view.animation.AnimationUtils
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.example.todo_list_project.AddNewTask
 import com.example.todo_list_project.MainActivity
 import com.example.todo_list_project.R
 import com.example.todo_list_project.classes.Task
@@ -55,6 +56,9 @@ class TaskDoneAdapter(private val taskList: List<Task>) : RecyclerView.Adapter<T
                 db.close()
                 MainActivity.taskDoneList.remove(task)
                 MainActivity.taskDoneAdapter.notifyItemRemoved(adapterPosition)
+
+                AddNewTask.cancelAlarm(itemView.context, task.id)
+                AddNewTask.cancelAlarm(itemView.context, task.id+100)
             }
         }
     }
