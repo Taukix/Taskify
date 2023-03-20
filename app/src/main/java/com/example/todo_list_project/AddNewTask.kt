@@ -5,6 +5,7 @@ import android.app.*
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -84,7 +85,8 @@ class AddNewTask : BottomSheetDialogFragment() {
             db.close()
 
             scheduleNotification(endingDateText!!, task.id , true, task.id)
-            scheduleNotification(reminderDateText!!, task.id, false, task.id+100)
+            Thread.sleep(1000)
+            scheduleNotification(reminderDateText!!, task.id, false, task.id + 100)
 
             MainActivity.taskNotDoneList.add(task)
             MainActivity.taskNotDoneAdapter.notifyItemInserted(MainActivity.taskNotDoneList.size - 1)
