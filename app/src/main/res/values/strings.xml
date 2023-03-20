@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">TODO_LIST_Project</string>
+    <string name="app_name">Taskify</string>
     <string name="description">Description</string>
     <string name="starting_date">Starting Date</string>
     <string name="ending_date">Ending Date</string>
@@ -9,7 +9,7 @@
     <string name="enter_description">Enter Description</string>
     <string name="_01_01_2023">01/01/2023</string>
     <string name="_10_00_am">10:00 AM</string>
-    <string name="valider">Valider</string>
+    <string name="validate">Validate</string>
     <string name="title">Title</string>
     <string name="create_a_new_task">Create a new Task</string>
     <string name="button_that_give_access_to_add_a_new_task">Button that give access to add a new task</string>
