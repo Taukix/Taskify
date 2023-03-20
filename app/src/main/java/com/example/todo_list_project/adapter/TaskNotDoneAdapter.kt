@@ -95,7 +95,6 @@ class TaskNotDoneAdapter(private val taskList: List<Task>) : RecyclerView.Adapte
             }
 
             if (task.isLate) {
-                Log.d("late", "late")
                 stateButton.setBackgroundColor(Color.RED)
             } else {
                 stateButton.setBackgroundColor(Color.GREEN)

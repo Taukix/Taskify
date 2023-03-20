@@ -57,13 +57,13 @@ class MainActivity : AppCompatActivity() {
 
         // Action du bouton d'ajout de tâche
         addTaskButton = findViewById(R.id.btnAddTaskPage)
-        addTaskButton.setOnClickListener(View.OnClickListener {
+        addTaskButton.setOnClickListener {
             AddNewTask.newInstance().show(supportFragmentManager, AddNewTask.TAG)
-        })
+        }
 
         // Action du bouton Done
         doneTaskButton = findViewById(R.id.btnDone)
-        doneTaskButton.setOnClickListener(View.OnClickListener {
+        doneTaskButton.setOnClickListener {
             if (doneTaskButton.text == "Not Done") {
                 recyclerViewNotDone.visibility = View.GONE
                 recyclerViewDone.visibility = View.VISIBLE
@@ -77,7 +77,7 @@ class MainActivity : AppCompatActivity() {
                 doneTaskButton.setBackgroundColor(resources.getColor(R.color.blue))
                 doneTaskButton.setTextColor(resources.getColor(R.color.white))
             }
-        })
+        }
     }
 
     //----------------------------------------------------------------------------------------------

@@ -8,7 +8,6 @@ import android.content.Intent
 import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
-import com.example.todo_list_project.handler.DatabaseHandler
 
 class NotificationReceiver : BroadcastReceiver() {
 
