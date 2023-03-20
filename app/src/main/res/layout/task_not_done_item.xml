@@ -137,4 +137,13 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/success"
+        android:visibility="invisible"
+        android:layout_width="216dp"
+        android:layout_height="185dp"
+        android:layout_gravity="center"
+        android:src="@drawable/success" />
+
 </androidx.cardview.widget.CardView>

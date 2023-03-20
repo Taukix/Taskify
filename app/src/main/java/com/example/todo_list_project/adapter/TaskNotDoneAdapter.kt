@@ -2,6 +2,7 @@ package com.example.todo_list_project.adapter
 
 import android.graphics.Color
 import android.icu.text.SimpleDateFormat
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -9,6 +10,7 @@ import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.todo_list_project.AddNewTask
@@ -44,6 +46,8 @@ class TaskNotDoneAdapter(private val taskList: List<Task>) : RecyclerView.Adapte
         private val validTaskIcon: ImageView = itemView.findViewById(R.id.validButton)
         private val deleteTaskIcon: ImageView = itemView.findViewById(R.id.deleteButton)
         private val stateButton: Button = itemView.findViewById(R.id.stateButton)
+        private val expandedLayout: LinearLayout = itemView.findViewById(R.id.expandedLayout)
+        private val success: ImageView = itemView.findViewById(R.id.success)
 
         fun bind(task: Task) {
             val outputFormat = SimpleDateFormat("dd/MM/yyyy", Locale.FRANCE)
@@ -56,13 +60,26 @@ class TaskNotDoneAdapter(private val taskList: List<Task>) : RecyclerView.Adapte
             reminder.text = outputFormatTime.format(task.reminder)
 
             validTaskIcon.setOnClickListener {
-                val db = DatabaseHandler.DbReaderHelper(itemView.context)
-                task.id.let { it1 -> db.updateTaskToDone(it1) }
-                db.close()
-                MainActivity.taskNotDoneList.remove(task)
-                MainActivity.taskNotDoneAdapter.notifyItemRemoved(adapterPosition)
-                MainActivity.taskDoneList.add(task)
-                MainActivity.taskDoneAdapter.notifyItemInserted(MainActivity.taskDoneList.size - 1)
+                val handler = Handler()
+                handler.postDelayed({
+                    val db = DatabaseHandler.DbReaderHelper(itemView.context)
+                    task.id.let { it1 -> db.updateTaskToDone(it1) }
+                    db.close()
+                    MainActivity.taskNotDoneList.remove(task)
+                    MainActivity.taskNotDoneAdapter.notifyItemRemoved(adapterPosition)
+                    MainActivity.taskDoneList.add(task)
+                    MainActivity.taskDoneAdapter.notifyItemInserted(MainActivity.taskDoneList.size - 1)
+                }, 2800)
+
+                success.visibility = View.VISIBLE
+                expandedLayout.visibility = View.INVISIBLE
+                success.animate().apply {
+                    duration = 3000
+                    rotationYBy(720f)
+                }.withEndAction {
+                    success.visibility = View.INVISIBLE
+                    expandedLayout.visibility = View.VISIBLE
+                }
             }
 
             deleteTaskIcon.setOnClickListener {
