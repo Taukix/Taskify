@@ -22,7 +22,7 @@ Ne manquez jamais une échéance grâce à la fonction de rappel. L'application 
 Clonez le projet depuis le référentiel GitHub en utilisant la commande suivante :
 
 ```
-git clone https://github.com/votre-utilisateur/Todo-List.git
+git clone https://github.com/Taukix/Todo-List.git
 ```
 
 ## Ouverture du Projet dans Android Studio
