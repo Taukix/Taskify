@@ -2,6 +2,8 @@
 
 Voici mon application Todo-List développée en Kotlin avec Android Studio. Cette application vous permet de gérer efficacement vos tâches quotidiennes en ajoutant, modifiant, et supprimant des tâches, tout en recevant des rappels à la date souhaitée.
 
+---
+
 ### Fonctionnalités
 
 ### _1. Ajout de Tâches_
@@ -16,6 +18,8 @@ L'application offre la possibilité de supprimer des tâches de manière simple 
 ### _4. Rappels_
 Ne manquez jamais une échéance grâce à la fonction de rappel. L'application vous enverra des notifications à la date et à l'heure que vous avez définies pour chaque tâche.
 
+---
+
 ## Comment Commencer
 
 ### Clonage du Projet
@@ -26,19 +30,19 @@ Clonez le projet depuis le référentiel GitHub en utilisant la commande suivant
 git clone https://github.com/Taukix/Todo-List.git
 ```
 
-## Ouverture du Projet dans Android Studio
+### Ouverture du Projet dans Android Studio
 
 Lancez Android Studio et ouvrez le projet en sélectionnant le dossier cloné.
 
-## Configuration de l'Émulateur ou Connexion d'un Appareil Physique
+### Configuration de l'Émulateur ou Connexion d'un Appareil Physique
 
 Assurez-vous d'avoir configuré un émulateur ou connecté un appareil Android physique pour tester l'application.
 
-## Build et Exécution de l'Application
+### Build et Exécution de l'Application
 
 Appuyez sur le bouton "Run" dans Android Studio pour compiler et exécuter l'application sur votre émulateur ou appareil physique.
 
-## Dépendances
+### Dépendances
 
 L'application utilise les dépendances suivantes :
 
@@ -48,9 +52,13 @@ Room Persistence Library
 Material Components for Android
 Assurez-vous de garder ces dépendances à jour pour bénéficier des dernières fonctionnalités et correctifs.
 
+---
+
 ## Contributions
 
 Les contributions sont les bienvenues ! Si vous souhaitez apporter des améliorations, corriger des bugs ou ajouter de nouvelles fonctionnalités, veuillez soumettre une demande de tirage (pull request).
+
+---
 
 ## Compétences
 
