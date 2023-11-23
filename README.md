@@ -20,6 +20,18 @@ Ne manquez jamais une échéance grâce à la fonction de rappel. L'application 
 
 ---
 
+<div style="display: flex; justify-content: space-between;">
+    <img src="https://github.com/Taukix/Todo-List/blob/main/ReadMe_Images/Good.png" width="49%">
+    <img src="https://github.com/Taukix/Todo-List/blob/main/ReadMe_Images/Wrong.png" width="49%">
+</div>
+
+<div style="display: flex; justify-content: space-between;">
+    <img src="https://github.com/Taukix/Todo-List/blob/main/ReadMe_Images/Add.png" width="49%">
+    <img src="https://github.com/Taukix/Todo-List/blob/main/ReadMe_Images/Done.png" width="49%">
+</div> 
+
+---
+
 ## Comment Commencer
 
 ### Clonage du Projet
