@@ -1,4 +1,4 @@
-# Todo-List
+# Taskify
 
 Voici mon application Todo-List développée en Kotlin avec Android Studio. Cette application vous permet de gérer efficacement vos tâches quotidiennes en ajoutant, modifiant, et supprimant des tâches, tout en recevant des rappels à la date souhaitée.
 
